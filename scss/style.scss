@@ -1,0 +1,57 @@
+/* GENERAL */
+body {
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.row {
+    margin: 0;
+    padding: 0 15px;
+}
+/* ABILITIES */
+.abilities {
+    font-size: 26px;
+    color: #fff;
+    flex: 1;
+    max-width: 700px;
+    height: 600px;
+    background: #776868;
+    border-radius: 15px; 
+    .top-line {
+        margin: 15px 0 40px;
+    }
+    .inlineb {
+        text-transform: uppercase;
+        display: inline-block;
+        width: 60px;
+        line-height: 35px;
+        text-align: center;
+    }
+    #point-pool {
+        float: right;
+    }
+    
+    .number-place, #point-pool {
+        background: #121111;
+        border: 2px solid #bada55;
+        border-radius: 3px;
+    }
+    .statiscits {
+        text-align: right;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+    }
+    .btn {
+        color: #45451e;
+        font-size: 24px;
+        width: 40px;
+        line-height: 22px;
+        border: 2px solid #2f1111;
+        position: relative;
+        bottom: 1px;
+    }
+    #randomize {
+        width: 120px;
+    }
+}
