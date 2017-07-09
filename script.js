@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //&& Adding to main pool
     Array.from(minusBtn).forEach(function(element) {
         element.addEventListener('click', function() {
-            var poolPoints = document.querySelector('#point-pool').innerHTML,
+            var poolPoints = pointPoolField.innerHTML,
                 poolPointstoNumber = Number(poolPoints),
                 getID = this.parentNode.getAttribute('id'),
                 getRightNumberPlace = document.querySelector(`#${getID} .number-place`),
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return false;
             } else {
                 getRightNumberPlace.innerHTML = setNumber;
-                document.querySelector('#point-pool').innerHTML = poolPointstoNumber;
+                pointPoolField.innerHTML = poolPointstoNumber;
             } 
         });                         
     });
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //&& Subtractioning from main pool
     Array.from(plusBtn).forEach(function(element) {
         element.addEventListener('click', function() {
-            var poolPoints = document.querySelector('#point-pool').innerHTML,
+            var poolPoints = pointPoolField.innerHTML,
                 poolPointstoNumber = Number(poolPoints),
                 getID = this.parentNode.getAttribute('id'),
                 getRightNumberPlace = document.querySelector(`#${getID} .number-place`),
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return false;
             } else {
                 getRightNumberPlace.innerHTML = setNumber;
-                document.querySelector('#point-pool').innerHTML = poolPointstoNumber;
+                pointPoolField.innerHTML = poolPointstoNumber;
             } 
         });
     });
