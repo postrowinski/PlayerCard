@@ -44,7 +44,10 @@ body {
     border: 2px solid #2f1111;
     position: relative;
     bottom: 1px; }
-  .abilities #randomize {
-    width: 120px; }
+  .abilities .advanced-btn .btn {
+    width: 120px;
+    margin-right: 15px; }
+  .abilities .advanced-btn #randomize {
+    margin-left: 100px; }
 
 /*# sourceMappingURL=style.css.map */
