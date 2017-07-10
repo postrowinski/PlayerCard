@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
         getStats = document.querySelectorAll('.statiscits');
     
     //Declare variables whos will be updated after button store will be clicked
-    var getStrStats;
-    var getDexStats;
-    var getConStats;
-    var getIntStats;
-    var getWisStats;
-    var getChaStats;
-    var getPoolStats;
+    var getStrStats,
+        getDexStats,
+        getConStats,
+        getIntStats,
+        getWisStats,
+        getChaStats,
+        getPoolStats;
     
     //function randomize value between 3 and 18
     function randomize() {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
              setNumber--;
              poolPointstoNumber++;
         
-            if (setNumber < 3 || poolPointstoNumber === -1) {
+            if (setNumber < 3) {
                 return false;
             } else {
                 getRightNumberPlace.innerHTML = setNumber;
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
        
     //Randomize start abilities value web webpage is loaded
     setRandom();
-    
+      
     //Click on Reroll button set new randomize value fo each stats
     //&& reset main abilities point   
     randomizeBtn.addEventListener('click', function () {
@@ -93,24 +93,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     //Store stats when store-stats button is clicked
-    storeBtn.addEventListener('click', function () {     
+    //&& after click on this button recall button is enabled // prevent crash
+    storeBtn.addEventListener('click', function () { 
+         
         getStrStats = getStats[0].children[0].innerHTML;
-        getDexStats = getStats[1].children[0].innerHTML;
+        getDexStats = getStats[1].children[0].innerHTML;        
         getConStats = getStats[2].children[0].innerHTML;
         getIntStats = getStats[3].children[0].innerHTML;
         getWisStats = getStats[4].children[0].innerHTML;
         getChaStats = getStats[5].children[0].innerHTML;
         getPoolStats = pointPoolField.innerHTML;
+        recallBtn.removeAttribute('disabled');
     });
     
     //Recall stats when recall-button is clicked
     recallBtn.addEventListener('click', function () {
         var setStats = [getStrStats, getDexStats, getConStats, getIntStats, getWisStats, getChaStats];
         
-        for (var i = 0; i < statsFields.length; i++) {
+        setStats.forEach(function(element, i) {
             statsFields[i].innerHTML = setStats[i];
-        }
-        
+        });
+    
         pointPoolField.innerHTML = getPoolStats;
     });
+    
 });
