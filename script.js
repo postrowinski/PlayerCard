@@ -8,18 +8,39 @@ document.addEventListener('DOMContentLoaded', function () {
         pointPoolField = document.querySelector('#point-pool'),
         storeBtn = document.querySelector('#store-stats'),
         recallBtn = document.querySelector('#recall-stats'),
-        oneStatsField = `${statsFields[0].classList[1]}`,
+        oneStatsField = `.${statsFields[0].classList[1]}`,
         getStats = document.querySelectorAll('.statiscits');
     
-    //Declare variables whos will be updated after button store will be clicked
-    var getStrStats,
-        getDexStats,
-        getConStats,
-        getIntStats,
-        getWisStats,
-        getChaStats,
-        getPoolStats;
+    function Stats(str, dex, con, int, wis, cha, pool) {  
+        this.str = str;
+        this.dex = dex;
+        this.con = con;
+        this.int = int;
+        this.wis = wis;
+        this.cha = cha;
+        this.pool = pool;
+    };
     
+    Stats.prototype.store = () => {
+        this.str = statsFields[0].innerHTML;
+        this.dex = statsFields[1].innerHTML;        
+        this.con = statsFields[2].innerHTML;
+        this.int = statsFields[3].innerHTML;
+        this.wis = statsFields[4].innerHTML;
+        this.cha = statsFields[5].innerHTML;
+        this.pool = pointPoolField.innerHTML;
+    };
+    
+    Stats.prototype.recall = () => {
+        statsFields[0].innerHTML = this.str;
+        statsFields[1].innerHTML = this.dex;
+        statsFields[2].innerHTML = this.con;
+        statsFields[3].innerHTML = this.int;
+        statsFields[4].innerHTML = this.wis;
+        statsFields[5].innerHTML = this.cha;
+        pointPoolField.innerHTML = this.pool;
+    }; 
+
     //function randomize value between 3 and 18
     function randomize() {
         let randomNumber = Math.floor(Math.random() * 15 + 3);
@@ -43,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var poolPoints = pointPoolField.innerHTML,
                 poolPointstoNumber = Number(poolPoints),
                 getID = this.parentNode.id,
-                getRightNumberPlace = document.querySelector(`#${getID} .${oneStatsField}`), 
+                getRightNumberPlace = document.querySelector(`#${getID} ${oneStatsField}`), 
                 getText = getRightNumberPlace.innerHTML,
                 setNumber = Number(getText);
             
@@ -66,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function () {
             var poolPoints = pointPoolField.innerHTML,
                 poolPointstoNumber = Number(poolPoints),
                 getID = this.parentNode.id,
-                getRightNumberPlace = document.querySelector(`#${getID} .${oneStatsField}`),
+                getRightNumberPlace = document.querySelector(`#${getID} ${oneStatsField}`),
                 getText = getRightNumberPlace.innerHTML,
                 setNumber = Number(getText);
             
-             setNumber++;
-             poolPointstoNumber--;
+            setNumber++;
+            poolPointstoNumber--;
             
             if (setNumber > 18 || poolPointstoNumber < 0) {
                 return false;
@@ -82,39 +103,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
        
-    //Randomize start abilities value web webpage is loaded
+    //Randomize start abilities value when webpage is loaded
     setRandom();
       
-    //Click on Reroll button set new randomize value fo each stats
+    //Click on reroll button set new randomize value fo each stats
     //&& reset main abilities point   
     randomizeBtn.addEventListener('click', function () {
         pointPoolField.innerHTML = 0;
         setRandom();
     });
     
-    //Store stats when store-stats button is clicked
-    //&& after click on this button recall button is enabled // prevent crash
+    //Store stats when store-stats button is click
+    //&& after click on recall button this element will be enabled // prevent crash
     storeBtn.addEventListener('click', function () { 
-         
-        getStrStats = getStats[0].children[0].innerHTML;
-        getDexStats = getStats[1].children[0].innerHTML;        
-        getConStats = getStats[2].children[0].innerHTML;
-        getIntStats = getStats[3].children[0].innerHTML;
-        getWisStats = getStats[4].children[0].innerHTML;
-        getChaStats = getStats[5].children[0].innerHTML;
-        getPoolStats = pointPoolField.innerHTML;
+        Stats.prototype.store();
         recallBtn.removeAttribute('disabled');
     });
     
-    //Recall stats when recall-button is clicked
+    //Recall stats when recall-button is click
     recallBtn.addEventListener('click', function () {
-        var setStats = [getStrStats, getDexStats, getConStats, getIntStats, getWisStats, getChaStats];
-        
-        setStats.forEach(function(element, i) {
-            statsFields[i].innerHTML = setStats[i];
-        });
-    
-        pointPoolField.innerHTML = getPoolStats;
-    });
-    
+        Stats.prototype.recall();
+    });   
 });
