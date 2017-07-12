@@ -8,39 +8,42 @@ document.addEventListener('DOMContentLoaded', function () {
         pointPoolField = document.querySelector('#point-pool'),
         storeBtn = document.querySelector('#store-stats'),
         recallBtn = document.querySelector('#recall-stats'),
-        oneStatsField = `.${statsFields[0].classList[1]}`,
+        oneStatsField = `.${statsFields[0].classList[1]}`, // .number-place
         getStats = document.querySelectorAll('.statiscits');
     
-    function Stats(str, dex, con, int, wis, cha, pool) {  
-        this.str = str;
-        this.dex = dex;
-        this.con = con;
-        this.int = int;
-        this.wis = wis;
-        this.cha = cha;
-        this.pool = pool;
+    class Stats {
+        construct(str, dex, con, int, wis, cha, pool) {
+            this.str = str;
+            this.dex = dex;
+            this.con = con;
+            this.int = int;
+            this.wis = wis;
+            this.cha = cha;
+            this.pool = pool;
+        }
+        
+        store() {
+            this.str = statsFields[0].innerHTML;
+            this.dex = statsFields[1].innerHTML;        
+            this.con = statsFields[2].innerHTML;
+            this.int = statsFields[3].innerHTML;
+            this.wis = statsFields[4].innerHTML;
+            this.cha = statsFields[5].innerHTML;
+            this.pool = pointPoolField.innerHTML;
+        }
+        
+        recall() {
+            statsFields[0].innerHTML = this.str;
+            statsFields[1].innerHTML = this.dex;
+            statsFields[2].innerHTML = this.con;
+            statsFields[3].innerHTML = this.int;
+            statsFields[4].innerHTML = this.wis;
+            statsFields[5].innerHTML = this.cha;
+            pointPoolField.innerHTML = this.pool;
+        }    
     };
     
-    Stats.prototype.store = () => {
-        this.str = statsFields[0].innerHTML;
-        this.dex = statsFields[1].innerHTML;        
-        this.con = statsFields[2].innerHTML;
-        this.int = statsFields[3].innerHTML;
-        this.wis = statsFields[4].innerHTML;
-        this.cha = statsFields[5].innerHTML;
-        this.pool = pointPoolField.innerHTML;
-    };
-    
-    Stats.prototype.recall = () => {
-        statsFields[0].innerHTML = this.str;
-        statsFields[1].innerHTML = this.dex;
-        statsFields[2].innerHTML = this.con;
-        statsFields[3].innerHTML = this.int;
-        statsFields[4].innerHTML = this.wis;
-        statsFields[5].innerHTML = this.cha;
-        pointPoolField.innerHTML = this.pool;
-    }; 
-
+    var stats = new Stats();
     //function randomize value between 3 and 18
     function randomize() {
         let randomNumber = Math.floor(Math.random() * 15 + 3);
@@ -116,12 +119,12 @@ document.addEventListener('DOMContentLoaded', function () {
     //Store stats when store-stats button is click
     //&& after click on recall button this element will be enabled // prevent crash
     storeBtn.addEventListener('click', function () { 
-        Stats.prototype.store();
+        stats.store();
         recallBtn.removeAttribute('disabled');
     });
     
     //Recall stats when recall-button is click
     recallBtn.addEventListener('click', function () {
-        Stats.prototype.recall();
+        stats.recall();
     });   
 });
